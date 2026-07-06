@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIR & OR — Montres, Bracelets & Bijoux</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0c;
+  --surface:#141318;
+  --surface-2:#1b1a20;
+  --gold:#c9a227;
+  --gold-bright:#e8c85a;
+  --copper:#b5651d;
+  --ink:#eeeae1;
+  --muted:#8b8780;
+  --line:#2a2830;
+  --danger:#c1443b;
+  --radius:2px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+}
+
+/* ---------- chain motif (signature element) ---------- */
+.chain-rule{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:18px 0;
+  opacity:.55;
+}
+.chain-rule span{
+  width:14px;height:14px;
+  border:2px solid var(--gold);
+  border-radius:50%;
+  position:relative;
+  flex:none;
+}
+.chain-rule span:nth-child(even){ transform: translateY(2px) rotate(20deg); border-color: var(--muted); }
+.chain-rule::before,.chain-rule::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--line),transparent);
+}
+
+/* ---------- nav ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(10,10,12,.85);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1240px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 24px;
+}
+.logo{
+  font-family:'Unbounded',sans-serif;
+  font-weight:800;
+  font-size:22px;
+  letter-spacing:.02em;
+  color:var(--ink);
+  display:flex;align-items:center;gap:10px;
+}
+.logo .dot{color:var(--gold);}
+.cart-btn{
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;
+  color:var(--bg);
+  background:var(--gold);
+  border:none;
+  padding:10px 16px;
+  border-radius:var(--radius);
+  cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.cart-btn:hover{ transform:translateY(-2px); box-shadow:0 6px 20px rgba(201,162,39,.35); }
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  max-width:1240px;margin:0 auto;
+  padding:64px 24px 40px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:40px;
+  align-items:center;
+}
+@media (max-width:860px){ .hero{grid-template-columns:1fr; padding-top:36px;} }
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:18px;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--gold);}
+h1.hero-title{
+  font-family:'Unbounded',sans-serif;
+  font-weight:900;
+  font-size:clamp(38px,6vw,64px);
+  line-height:.98;
+  letter-spacing:-.01em;
+}
+h1.hero-title em{
+  font-style:normal;
+  color:var(--gold);
+  background:linear-gradient(120deg,var(--gold-bright),var(--gold));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.hero p.sub{
+  margin-top:20px;
+  color:var(--muted);
+  font-size:16px;
+  max-width:44ch;
+  line-height:1.6;
+}
+.hero-ctas{ margin-top:32px; display:flex; gap:14px; flex-wrap:wrap; }
+.btn-primary{
+  font-family:'Inter',sans-serif;font-weight:600;font-size:14px;
+  background:var(--gold); color:var(--bg); border:none;
+  padding:14px 26px; border-radius:var(--radius); cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.btn-primary:hover{ transform:translateY(-3px); box-shadow:0 10px 28px rgba(201,162,39,.3); }
+.btn-ghost{
+  font-family:'Inter',sans-serif;font-weight:600;font-size:14px;
+  background:transparent;color:var(--ink); border:1px solid var(--line);
+  padding:14px 26px;border-radius:var(--radius);cursor:pointer;
+  transition:border-color .25s ease, color .25s ease;
+}
+.btn-ghost:hover{ border-color:var(--gold); color:var(--gold-bright); }
+
+/* rotating emblem — signature visual */
+.emblem-wrap{ display:flex; align-items:center; justify-content:center; }
+.emblem{ width:min(340px,70vw); animation:spin 40s linear infinite; }
+@keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+.emblem-inner{ animation:counterspin 40s linear infinite; }
+@keyframes counterspin{ from{transform:rotate(0deg);} to{transform:rotate(-360deg);} }
+
+/* ---------- filters ---------- */
+.filters-wrap{
+  max-width:1240px;margin:0 auto;padding:0 24px 8px;
+  display:flex;gap:10px;flex-wrap:wrap;
+}
+.chip{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12.5px;
+  color:var(--muted);
+  background:var(--surface);
+  border:1px solid var(--line);
+  padding:9px 16px;
+  border-radius:100px;
+  cursor:pointer;
+  transition:all .2s ease;
+  white-space:nowrap;
+}
+.chip:hover{ color:var(--ink); border-color:var(--gold); }
+.chip.active{ color:var(--bg); background:var(--gold); border-color:var(--gold); font-weight:600; }
+
+/* ---------- grid ---------- */
+.grid{
+  max-width:1240px;margin:0 auto;
+  padding:28px 24px 80px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:22px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  cursor:default;
+  opacity:0;
+  transform:translateY(24px);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;
+  display:flex;flex-direction:column;
+}
+.card.in-view{ opacity:1; transform:translateY(0); }
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--gold);
+  box-shadow:0 18px 40px rgba(0,0,0,.45);
+}
+.card-media{
+  position:relative;
+  aspect-ratio:1/1;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(201,162,39,.18), transparent 60%),
+    linear-gradient(155deg,var(--surface-2),#0d0c10);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.card-media svg{ width:52%; height:52%; transition:transform .5s ease; filter:drop-shadow(0 6px 14px rgba(0,0,0,.5)); }
+.card:hover .card-media svg{ transform:scale(1.08) rotate(-4deg); }
+.badge{
+  position:absolute;top:10px;left:10px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px; letter-spacing:.04em;
+  padding:5px 9px; border-radius:100px;
+  background:rgba(193,68,59,.15); color:#e2857e;
+  border:1px solid rgba(193,68,59,.4);
+}
+.badge.stock{
+  left:auto; right:10px;
+  background:rgba(90,180,120,.12); color:#7fd6a0; border-color:rgba(90,180,120,.35);
+  display:flex; align-items:center; gap:6px;
+}
+.badge.stock .pulse{
+  width:6px;height:6px;border-radius:50%;background:#7fd6a0;
+  animation:pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.25;} }
+.card-body{ padding:16px 16px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.card-cat{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+.card-name{ font-family:'Unbounded',sans-serif; font-weight:600; font-size:15px; line-height:1.3; }
+.card-rating{ font-size:12px; color:var(--gold); letter-spacing:1px; }
+.price-row{ margin-top:auto; display:flex; align-items:baseline; gap:8px; padding-top:6px; }
+.price{ font-family:'JetBrains Mono',monospace; font-weight:600; font-size:16.5px; color:var(--gold-bright); }
+.price-old{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--muted); text-decoration:line-through; }
+.add-btn{
+  margin-top:12px;
+  width:100%;
+  font-family:'Inter',sans-serif; font-weight:600; font-size:13.5px;
+  background:transparent; color:var(--ink);
+  border:1px solid var(--line);
+  padding:11px; border-radius:var(--radius); cursor:pointer;
+  transition:background .25s ease, color .25s ease, border-color .25s ease;
+}
+.add-btn:hover{ background:var(--gold); color:var(--bg); border-color:var(--gold); }
+
+/* ---------- modal ---------- */
+.overlay{
+  position:fixed; inset:0; background:rgba(6,6,7,.7);
+  backdrop-filter:blur(6px);
+  display:none; align-items:flex-end; justify-content:center;
+  z-index:100;
+}
+.overlay.open{ display:flex; }
+@media (min-width:640px){ .overlay{ align-items:center; } }
+.modal{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-bottom:none;
+  width:100%; max-width:460px;
+  max-height:88vh; overflow-y:auto;
+  border-radius:16px 16px 0 0;
+  padding:26px 24px 30px;
+  transform:translateY(30px); opacity:0;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s ease;
+}
+@media (min-width:640px){ .modal{ border-radius:4px; border-bottom:1px solid var(--line); } }
+.overlay.open .modal{ transform:translateY(0); opacity:1; }
+.modal-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:18px; }
+.modal-title{ font-family:'Unbounded',sans-serif; font-weight:600; font-size:16px; }
+.modal-price{ font-family:'JetBrains Mono',monospace; color:var(--gold-bright); font-size:15px; margin-top:6px; }
+.close-btn{ background:none; border:none; color:var(--muted); font-size:22px; cursor:pointer; line-height:1; }
+.close-btn:hover{ color:var(--ink); }
+.field{ margin-bottom:14px; }
+.field label{ display:block; font-size:12.5px; color:var(--muted); margin-bottom:6px; font-family:'JetBrains Mono',monospace; }
+.field input, .field select{
+  width:100%; background:var(--bg); border:1px solid var(--line); color:var(--ink);
+  padding:12px 12px; border-radius:var(--radius); font-family:'Inter',sans-serif; font-size:14px;
+  transition:border-color .2s ease;
+}
+.field input:focus, .field select:focus{ outline:none; border-color:var(--gold); }
+.qty-row{ display:flex; align-items:center; gap:12px; }
+.qty-btn{ width:36px;height:36px; background:var(--bg); border:1px solid var(--line); color:var(--ink); border-radius:var(--radius); cursor:pointer; font-size:16px; }
+.qty-btn:hover{ border-color:var(--gold); color:var(--gold-bright); }
+.qty-val{ font-family:'JetBrains Mono',monospace; font-size:16px; min-width:24px; text-align:center; }
+.submit-btn{
+  width:100%; margin-top:8px;
+  background:var(--gold); color:var(--bg); border:none;
+  padding:15px; border-radius:var(--radius); font-weight:700; font-size:14px; cursor:pointer;
+  transition:transform .2s ease;
+}
+.submit-btn:hover{ transform:translateY(-2px); }
+.confirm{ text-align:center; padding:30px 0 10px; }
+.confirm .check{ width:56px;height:56px;border-radius:50%;background:rgba(90,180,120,.12);border:1px solid rgba(90,180,120,.4); display:flex;align-items:center;justify-content:center;margin:0 auto 16px; color:#7fd6a0; font-size:26px; }
+
+footer{
+  border-top:1px solid var(--line);
+  padding:40px 24px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12.5px;
+  font-family:'JetBrains Mono',monospace;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="logo">NOIR<span class="dot">&amp;</span>OR</div>
+    <button class="cart-btn" onclick="document.getElementById('grid-top').scrollIntoView({behavior:'smooth'})">VOIR LA BOUTIQUE →</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">Livraison 58 wilayas — Paiement à la livraison</div>
+    <h1 class="hero-title">L'éclat qui<br><em>se remarque.</em></h1>
+    <p class="sub">Packs montre + bracelet + collier, montres homme &amp; femme, bagues et bijoux acier inoxydable. Style streetwear, finition premium, prix DZ.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('grid-top').scrollIntoView({behavior:'smooth'})">Découvrir la collection</button>
+      <button class="btn-ghost" onclick="filterCat('Packs')">Voir les packs</button>
+    </div>
+  </div>
+  <div class="emblem-wrap">
+    <svg class="emblem" viewBox="0 0 300 300">
+      <g class="emblem-inner">
+        <circle cx="150" cy="150" r="118" fill="none" stroke="#2a2830" stroke-width="1"/>
+        <circle cx="150" cy="150" r="90" fill="none" stroke="#c9a227" stroke-width="1" stroke-dasharray="2 6"/>
+        <g fill="none" stroke="#c9a227" stroke-width="6" stroke-linecap="round">
+          <ellipse cx="150" cy="60" rx="16" ry="24"/>
+          <ellipse cx="150" cy="108" rx="16" ry="24"/>
+          <ellipse cx="150" cy="156" rx="16" ry="24"/>
+          <ellipse cx="150" cy="204" rx="16" ry="24"/>
+          <ellipse cx="150" cy="252" rx="16" ry="24"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<div class="chain-rule"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+<div id="grid-top" class="filters-wrap"></div>
+<div class="grid" id="grid"></div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal-content"></div>
+</div>
+
+<footer>NOIR &amp; OR — Bijouterie streetwear · Commandes traitées sous 24-48h · © 2026</footer>
+
+<script>
+/* ---------- icons ---------- */
+const icons = {
+  watch: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 8h16l2 10H22l2-10Z" fill="#c9a227"/><path d="M24 56h16l2-10H22l2 10Z" fill="#c9a227"/><circle cx="32" cy="32" r="17" stroke="#e8c85a" stroke-width="3"/><path d="M32 22v10l7 5" stroke="#eeeae1" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+  necklace: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 14c4 20 14 30 22 30s18-10 22-30" stroke="#c9a227" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="46" r="7" fill="#e8c85a"/></svg>`,
+  bracelet: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="32" cy="32" rx="22" ry="14" stroke="#c9a227" stroke-width="4"/><ellipse cx="32" cy="32" rx="14" ry="7" stroke="#e8c85a" stroke-width="2"/></svg>`,
+  ring: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="38" r="16" stroke="#c9a227" stroke-width="4"/><path d="M24 22l8-12 8 12-8 6-8-6Z" fill="#e8c85a"/></svg>`,
+  pack: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="44" height="44" rx="4" stroke="#c9a227" stroke-width="2"/><circle cx="32" cy="24" r="6" fill="#e8c85a"/><ellipse cx="32" cy="42" rx="12" ry="6" stroke="#e8c85a" stroke-width="2"/></svg>`
+};
+
+/* ---------- product data (placeholder catalog — swap prices/images with your real products) ---------- */
+const products = [
+  {id:1,cat:'Packs',name:"Pack Montre + Bracelet + Collier N°07",price:5500,old:6500,rating:4.7,icon:'pack',stock:true},
+  {id:2,cat:'Packs',name:"Pack Trio Acier Noir Mat",price:5900,old:6900,rating:4.5,icon:'pack',stock:true},
+  {id:3,cat:'Packs',name:"Pack Duo Montre + Bracelet",price:3900,old:4500,rating:4.6,icon:'pack',stock:false},
+  {id:4,cat:'Montres Homme',name:"Montre Chrono Acier Argenté",price:4200,old:null,rating:4.4,icon:'watch',stock:true},
+  {id:5,cat:'Montres Homme',name:"Montre Cadran Noir Mat",price:3500,old:null,rating:4.3,icon:'watch',stock:true},
+  {id:6,cat:'Montres Homme',name:"Montre Squelette Gold Edition",price:6500,old:7200,rating:4.8,icon:'watch',stock:true},
+  {id:7,cat:'Montres Femme',name:"Montre Femme Bracelet Fin Or",price:3900,old:4500,rating:4.7,icon:'watch',stock:true},
+  {id:8,cat:'Montres Femme',name:"Montre Femme Céramique Blanche",price:4600,old:null,rating:4.6,icon:'watch',stock:true},
+  {id:9,cat:'Colliers',name:"Collier Chaîne Cubaine Argent",price:2800,old:3400,rating:4.5,icon:'necklace',stock:true},
+  {id:10,cat:'Colliers',name:"Collier Pendentif Croix Acier",price:2200,old:null,rating:4.3,icon:'necklace',stock:true},
+  {id:11,cat:'Bracelets',name:"Bracelet Gourmette Acier",price:1800,old:2200,rating:4.4,icon:'bracelet',stock:true},
+  {id:12,cat:'Bracelets',name:"Bracelet Jonc Doré",price:1600,old:null,rating:4.2,icon:'bracelet',stock:true},
+  {id:13,cat:'Bagues',name:"Bague Sceau Acier Noir",price:1500,old:1900,rating:4.6,icon:'ring',stock:true},
+  {id:14,cat:'Bagues',name:"Bague Duo Or/Argent",price:1300,old:null,rating:4.1,icon:'ring',stock:true},
+];
+
+const cats = ['Tout','Packs','Montres Homme','Montres Femme','Colliers','Bracelets','Bagues'];
+let activeCat = 'Tout';
+
+function renderFilters(){
+  const wrap = document.getElementById('grid-top');
+  wrap.innerHTML = cats.map(c=>`<button class="chip ${c===activeCat?'active':''}" onclick="filterCat('${c}')">${c}</button>`).join('');
+}
+
+function filterCat(c){
+  activeCat = c;
+  renderFilters();
+  renderGrid();
+}
+
+function stars(r){
+  const full = Math.round(r);
+  return '★'.repeat(full) + '☆'.repeat(5-full);
+}
+
+function renderGrid(){
+  const grid = document.getElementById('grid');
+  const list = activeCat==='Tout' ? products : products.filter(p=>p.cat===activeCat);
+  grid.innerHTML = list.map(p=>`
+    <div class="card" data-id="${p.id}">
+      <div class="card-media">
+        ${p.old ? '<div class="badge">PROMO</div>' : ''}
+        <div class="badge stock"><span class="pulse"></span>${p.stock?'En stock':'Derniers articles'}</div>
+        ${icons[p.icon]}
+      </div>
+      <div class="card-body">
+        <div class="card-cat">${p.cat}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-rating">${stars(p.rating)} <span style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;">${p.rating}</span></div>
+        <div class="price-row">
+          <span class="price">${p.price.toLocaleString('fr-FR')} DA</span>
+          ${p.old?`<span class="price-old">${p.old.toLocaleString('fr-FR')} DA</span>`:''}
+        </div>
+        <button class="add-btn" onclick="openOrder(${p.id})">Commander</button>
+      </div>
+    </div>
+  `).join('');
+
+  // reveal on scroll
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); obs.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.card').forEach(c=>obs.observe(c));
+}
+
+/* ---------- order modal ---------- */
+let currentQty = 1;
+function openOrder(id){
+  currentQty = 1;
+  const p = products.find(x=>x.id===id);
+  const overlay = document.getElementById('overlay');
+  const modal = document.getElementById('modal-content');
+  modal.innerHTML = `
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">${p.name}</div>
+        <div class="modal-price">${p.price.toLocaleString('fr-FR')} DA</div>
+      </div>
+      <button class="close-btn" onclick="closeOrder()">✕</button>
+    </div>
+    <form id="order-form" onsubmit="submitOrder(event, ${p.id})">
+      <div class="field"><label>Nom &amp; Prénom</label><input required type="text" placeholder="Votre nom complet"></div>
+      <div class="field"><label>Téléphone</label><input required type="tel" placeholder="05XX XX XX XX"></div>
+      <div class="field"><label>Wilaya</label>
+        <select required>
+          <option value="">Sélectionner la wilaya</option>
+          <option>Alger</option><option>Oran</option><option>Constantine</option>
+          <option>Blida</option><option>Sétif</option><option>Annaba</option><option>Autre</option>
+        </select>
+      </div>
+      <div class="field"><label>Adresse de livraison</label><input required type="text" placeholder="Adresse complète"></div>
+      <div class="field">
+        <label>Quantité</label>
+        <div class="qty-row">
+          <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+          <span class="qty-val" id="qty-val">1</span>
+          <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+      <button class="submit-btn" type="submit">Confirmer la commande — Paiement à la livraison</button>
+    </form>
+  `;
+  overlay.classList.add('open');
+}
+function changeQty(d){
+  currentQty = Math.max(1, currentQty+d);
+  document.getElementById('qty-val').textContent = currentQty;
+}
+function closeOrder(){ document.getElementById('overlay').classList.remove('open'); }
+document.getElementById('overlay').addEventListener('click', (e)=>{ if(e.target.id==='overlay') closeOrder(); });
+
+function submitOrder(e, id){
+  e.preventDefault();
+  // NOTE: hook this up to your order backend (Formspree, Google Sheet, WhatsApp API, etc.)
+  const modal = document.getElementById('modal-content');
+  modal.innerHTML = `
+    <div class="confirm">
+      <div class="check">✓</div>
+      <div class="modal-title">Commande enregistrée</div>
+      <p style="color:var(--muted);margin-top:10px;font-size:14px;">Nous vous contactons rapidement pour confirmer la livraison.</p>
+      <button class="submit-btn" style="margin-top:22px;" onclick="closeOrder()">Fermer</button>
+    </div>
+  `;
+}
+
+renderFilters();
+renderGrid();
+</script>
+
+</body>
+</html>
